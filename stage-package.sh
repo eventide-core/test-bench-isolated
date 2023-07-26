@@ -73,7 +73,7 @@ stage_files() {
 
   require_pattern="s/^[[:space:]]*require[[:space:]]+['\"]($lib_name_pattern\/[^'\"]+)['\"][[:space:]]*$/\1.rb/p"
 
-  for file in $(sed --quiet --regexp-extended $require_pattern $loader_file); do
+  for file in $(sed -n -E $require_pattern $loader_file); do
     if [ -s $lib_dir/$file ]; then
       stage_file $lib_dir/$file
     fi
@@ -84,6 +84,9 @@ stage_lib() {
   lib_dir=gems/ruby/$ruby_api_version/gems/$1-*/lib
   lib_name=${1/-/\/}
   controls_lib_name=$lib_name/controls
+
+  mkdir -p stage/lib/test_bench
+  echo "require 'io/console'" > stage/lib/test_bench/isolated.rb
 
   stage_files $lib_name $lib_dir
   stage_files $controls_lib_name $lib_dir
