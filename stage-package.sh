@@ -89,9 +89,6 @@ stage_lib() {
   stage_files $controls_lib_name $lib_dir
 }
 
-mkdir -p stage/lib/test_bench
-echo "require 'io/console'" > stage/lib/test_bench/isolated.rb
-
 stage_lib test_bench-random
 stage_lib test_bench-telemetry
 stage_lib test_bench-output
