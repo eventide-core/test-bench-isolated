@@ -85,12 +85,12 @@ stage_lib() {
   lib_name=${1/-/\/}
   controls_lib_name=$lib_name/controls
 
-  mkdir -p stage/lib/test_bench
-  echo "require 'io/console'" > stage/lib/test_bench/isolated.rb
-
   stage_files $lib_name $lib_dir
   stage_files $controls_lib_name $lib_dir
 }
+
+mkdir -p stage/lib/test_bench
+echo "require 'io/console'" > stage/lib/test_bench/isolated.rb
 
 stage_lib test_bench-random
 stage_lib test_bench-telemetry
