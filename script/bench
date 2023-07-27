@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'test_bench_isolated/test_bench'
+
+TestBenchIsolated::TestBench::CLI.()
