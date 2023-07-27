@@ -10,7 +10,7 @@ echo
 echo "Start ($(basename "$0"))"
 
 echo
-echo "Updating lib/ Directory"
+echo "Importing lib/ Directory"
 echo "= = ="
 
 rm -rf lib
@@ -57,7 +57,7 @@ ED
 done
 
 echo
-echo "Running CLI"
+echo "Testing CLI"
 echo "- - -"
 ruby --disable-gems -r./init.rb -e 'TestBenchIsolated::TestBench::CLI.()' || true
 
