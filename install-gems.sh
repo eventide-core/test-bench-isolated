@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eu -o pipefail
+set -eEuo pipefail
 
 echo
 echo "Installing gems locally"
