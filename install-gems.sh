@@ -16,7 +16,7 @@ if [ -d gems ]; then
   echo
 fi
 
-cmd="gem install --pre --no-document --install-dir ./gems/ruby/$ruby_api_version --bindir ./gems/bin --no-user-install test_bench"
+cmd="gem install --no-document --install-dir ./gems/ruby/$ruby_api_version --bindir ./gems/bin --no-user-install test_bench"
 
 echo $cmd
 ($cmd)
