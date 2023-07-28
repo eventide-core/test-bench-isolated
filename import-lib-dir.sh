@@ -13,7 +13,7 @@ echo
 echo "Importing lib/ Directory"
 echo "= = ="
 
-rm -rf lib
+rm -rf lib/test_bench_isolated
 
 mkdir -p lib/test_bench_isolated
 
