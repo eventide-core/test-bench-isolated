@@ -15,7 +15,7 @@ module TestBenchIsolated
           exclude_patterns ||= Defaults.exclude_patterns
   
           if exclude_patterns.instance_of?(String)
-            exclude_patterns = exclude_patterns.split(',')
+            exclude_patterns = exclude_patterns.split(':')
           end
   
           new(exclude_patterns)

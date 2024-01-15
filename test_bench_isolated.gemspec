@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
 
   s.bindir = 'script'
-  s.executables << 'bench'
+  s.executables << 'bench-isolated'
 
   s.require_paths = %w(lib)
   s.files = Dir.glob 'lib/**/*'

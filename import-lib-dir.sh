@@ -56,6 +56,8 @@ ED
   done
 done
 
+mv -vf script/bench script/bench-isolated
+
 echo
 echo "Testing CLI"
 echo "- - -"

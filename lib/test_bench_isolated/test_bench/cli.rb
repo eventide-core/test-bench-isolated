@@ -148,14 +148,21 @@ module TestBenchIsolated
   
           when '-x', '--exclude', '--no-exclude'
             if not negated?(switch)
-              exclude_file_pattern_text = switch_value!(argument_index, switch)
+              exclude_pattern_text = switch_value!(argument_index, switch)
+  
+              if env.key?('TEST_BENCH_EXCLUDE_FILE_PATTERN')
+                exclude_pattern_text = [
+                  env['TEST_BENCH_EXCLUDE_FILE_PATTERN'],
+                  exclude_pattern_text
+                ].join(':')
+              end
             else
-              exclude_file_pattern_text = ''
+              exclude_pattern_text = ''
             end
   
-            env['TEST_BENCH_EXCLUDE_FILE_PATTERN'] = exclude_file_pattern_text
+            env['TEST_BENCH_EXCLUDE_FILE_PATTERN'] = exclude_pattern_text
   
-          when '-f', '--only-failure', '--no-only-failure'
+          when '-f', '-F', '--only-failure', '--no-only-failure'
             if not negated?(switch)
               only_failure_text = 'on'
             else
@@ -163,6 +170,15 @@ module TestBenchIsolated
             end
   
             env['TEST_BENCH_ONLY_FAILURE'] = only_failure_text
+  
+          when '-p', '-P', '--require-passing-test', '--no-require-passing-test'
+            if not negated?(switch)
+              require_passing_tests = 'on'
+            else
+              require_passing_tests = 'off'
+            end
+  
+            env['TEST_BENCH_REQUIRE_PASSING_TEST'] = require_passing_tests
   
           when '-o', '--output-styling'
             output_styling_text = switch_value(argument_index) do
@@ -206,7 +222,7 @@ module TestBenchIsolated
   
         Configuration Options:
         \t-d, --[no]detail                  Always show (or hide) details (Default: #{Session::Output::Detail.default})
-        \t-x, --[no-]exclude PATTERN        Do not execute test files matching PATTERN (Default: #{Run::GetFiles::Defaults.exclude_file_pattern.inspect})
+        \t-x, --[no-]exclude PATTERN        Do not execute test files matching PATTERN (Default: #{Run::GetFiles::Defaults.exclude_patterns.inspect})
         \t-f, --[no-]only-failure           Don't display output for test files that pass (Default: #{Run::Output::File::Defaults.only_failure ? 'on' : 'off'})
         \t-o, --output-styling [on|off|detect]
         \t                                  Render output coloring and font styling escape codes (Default: #{Output::Writer::Styling.default})
@@ -231,7 +247,11 @@ module TestBenchIsolated
       end
   
       def negated?(switch)
-        switch.start_with?('--no-')
+        if switch.start_with?('--')
+          switch.start_with?('--no-')
+        else
+          /^-[A-Z]/.match?(switch)
+        end
       end
   
       def exit_code?

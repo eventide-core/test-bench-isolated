@@ -35,7 +35,7 @@ module TestBenchIsolated
       end
       attr_writer :path_sequence
   
-      def self.build(exclude: nil)
+      def self.build(exclude: nil, session: nil)
         instance = new
   
         GetFiles.configure(instance, exclude:)
@@ -44,13 +44,15 @@ module TestBenchIsolated
   
         Random.configure(instance)
   
-        session = Session.build do |telemetry|
-          Output::File.register(telemetry)
-          Output::Summary::Error.register(telemetry)
-          Output::Summary.register(telemetry)
-  
-          instance.telemetry = telemetry
+        if session.nil?
+          session = Session.build do |telemetry|
+            Output::File.register(telemetry)
+            Output::Summary::Error.register(telemetry)
+            Output::Summary.register(telemetry)
+          end
         end
+  
+        instance.telemetry = session.telemetry
   
         Session.configure(instance, session:)
   
@@ -67,10 +69,10 @@ module TestBenchIsolated
         instance.(path)
       end
   
-      def self.configure(receiver, exclude: nil, attr_name: nil)
+      def self.configure(receiver, exclude: nil, session: nil, attr_name: nil)
         attr_name ||= :run
   
-        instance = build(exclude:)
+        instance = build(exclude:, session:)
         receiver.public_send(:"#{attr_name}=", instance)
       end
   
