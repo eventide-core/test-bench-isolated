@@ -28,6 +28,8 @@ require 'test_bench_isolated/test_bench/session/controls/events/fixture_started'
 require 'test_bench_isolated/test_bench/session/controls/events/fixture_finished'
 require 'test_bench_isolated/test_bench/session/controls/events'
 
+require 'test_bench_isolated/test_bench/session/controls/telemetry_sink'
+
 require 'test_bench_isolated/test_bench/session/controls/substitute/path'
 
 require 'test_bench_isolated/test_bench/session/controls/event'

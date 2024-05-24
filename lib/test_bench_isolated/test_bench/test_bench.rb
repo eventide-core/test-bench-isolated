@@ -35,6 +35,10 @@ module TestBenchIsolated
       session&.telemetry
     end
   
+    def self.register_telemetry_sink(telemetry_sink)
+      session&.register_telemetry_sink(telemetry_sink)
+    end
+  
     module DeactivatedVariants
       def _context(title=nil, &)
         context(title)

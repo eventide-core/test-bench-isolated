@@ -207,6 +207,10 @@ module TestBenchIsolated
         compare_sequence != assertion_sequence
       end
   
+      def register_telemetry_sink(telemetry_sink)
+        telemetry.register(telemetry_sink)
+      end
+  
       def record_assertion
         self.assertion_sequence += 1
       end

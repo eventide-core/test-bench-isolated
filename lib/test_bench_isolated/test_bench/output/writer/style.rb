@@ -19,10 +19,12 @@ module TestBenchIsolated
               :faint => '2',
               :italic => '3',
               :underline => '4',
+              :reverse_video => '7',
   
               :reset_intensity => '22',
               :reset_italic => '23',
               :reset_underline => '24',
+              :reset_reverse_video => '27',
   
               :black => '30',
               :red => '31',
