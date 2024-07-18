@@ -14,8 +14,7 @@ echo "Packaging"
 echo "= = ="
 
 git_remote_name="${GIT_REMOTE_NAME:-origin}"
-#git_default_branch="${GIT_DEFAULT_BRANCH:-master}"
-git_default_branch="main"
+git_default_branch="${GIT_DEFAULT_BRANCH:-master}"
 
 echo
 echo "Remote Name: $git_remote_name"
