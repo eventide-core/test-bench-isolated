@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |s|
   s.name = 'test_bench'
-  s.version = '1'
+  s.version = '2'
 
   s.authors = ['Nathan Ladd']
   s.email = 'nathanladd+github@gmail.com'
